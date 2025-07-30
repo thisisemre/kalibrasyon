@@ -1,5 +1,4 @@
 import { calculateLinearRegression } from '@/utils/linearRegression';
-import type { RegressionResult } from '@/types/calibration';
 
 type RegressionInfoProps = {
   xValues: number[];
@@ -82,7 +81,7 @@ export default function RegressionInfo({ xValues, yValues }: RegressionInfoProps
       {/* Kalite açıklaması */}
       <div className="mt-3 text-xs text-gray-600 bg-white p-2 rounded border">
         <strong>R² Yorumu:</strong> Veri noktalarının doğrusal modele ne kadar uygun olduğunu gösterir. 
-        1.0'a yakın değerler daha iyi uyumu ifade eder.
+        1.0&apos;a yakın değerler daha iyi uyumu ifade eder.
       </div>
     </div>
   );

@@ -1,9 +1,8 @@
 'use client';
 
 import { Chart as ChartJS, LineElement, PointElement, LinearScale, CategoryScale, Title, Tooltip, Legend } from 'chart.js';
-// @ts-ignore
+// @ts-expect-error chartjs-plugin-trendline doesn't have TypeScript definitions
 import ChartTrendline from 'chartjs-plugin-trendline';
-// @ts-ignore
 import { Line } from 'react-chartjs-2';
 import React from 'react';
 

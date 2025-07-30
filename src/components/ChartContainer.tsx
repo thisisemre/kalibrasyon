@@ -1,6 +1,6 @@
 import CalibrationChart from './CalibrationChart';
 import { calculateLinearRegression } from '@/utils/linearRegression';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 type ChartContainerProps = {
   xValues: number[];
@@ -14,16 +14,20 @@ export default function ChartContainer({
   validPointsCount 
 }: ChartContainerProps) {
   const [isUpdating, setIsUpdating] = useState(false);
-  const regression = calculateLinearRegression(xValues, yValues);
+  
+  // Memoize regression calculation to prevent unnecessary re-calculations
+  const regression = useMemo(() => {
+    return calculateLinearRegression(xValues, yValues);
+  }, [xValues, yValues]);
 
-  // Animation trigger when values change
+  // Animation trigger when equation or R² actually changes
   useEffect(() => {
     if (regression) {
       setIsUpdating(true);
       const timer = setTimeout(() => setIsUpdating(false), 400);
       return () => clearTimeout(timer);
     }
-  }, [regression?.equation, regression?.rSquared]);
+  }, [regression?.equation, regression?.rSquared , regression]);
 
   const getRSquaredColor = (rSquared: number): string => {
     if (rSquared >= 0.95) return 'text-green-600';
